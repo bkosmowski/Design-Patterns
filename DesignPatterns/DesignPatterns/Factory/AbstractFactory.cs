@@ -47,28 +47,50 @@ namespace DesignPatterns.Factory
         }
     }
 
-    public enum AvailableDrink
-    {
-        Coffee,
-        Tea
-    }
-
     public class HotDrinkMachine
     {
-        private readonly Dictionary<AvailableDrink, IHotDrinkFactory> _factories = new Dictionary<AvailableDrink, IHotDrinkFactory>();
-
+        private readonly List<(string, IHotDrinkFactory)> _factories = new List<(string, IHotDrinkFactory)>();
         public HotDrinkMachine()
         {
-            foreach (AvailableDrink drink in Enum.GetValues(typeof(AvailableDrink)))
+            foreach (var type in typeof(HotDrinkMachine).Assembly.GetTypes())
             {
-                _factories.Add(drink, (IHotDrinkFactory)Activator.CreateInstance(
-                    Type.GetType($"DesignPatterns.Factory.{Enum.GetName(typeof(AvailableDrink), drink)}Factory")));
+                if (typeof(IHotDrinkFactory).IsAssignableFrom(type) && type.IsInterface == false)
+                {
+                    _factories.Add((type.Name.Replace("Factory", string.Empty),
+                        (IHotDrinkFactory) Activator.CreateInstance(type)));
+                }
             }
         }
 
-        public IHotDrink PrepareDrink(AvailableDrink drink, int amount)
+        public IHotDrink PrepareDrink()
         {
-            return _factories[drink].Prepare(amount);
+            Console.WriteLine("Available drinks");
+            for (var index = 0; index < _factories.Count; index++)
+            {
+                var tuple = _factories[index];
+                Console.WriteLine($"{index}: {tuple.Item1}");
+            }
+
+            while (true)
+            {
+                string s;
+                if ((s = Console.ReadLine()) != null
+                    && int.TryParse(s, out var i)
+                    && i >= 0
+                    && i < _factories.Count)
+                {
+                    Console.Write("Specify amount: ");
+                    s = Console.ReadLine();
+                    if (s != null
+                        && int.TryParse(s, out var amount)
+                        && amount > 0)
+                    {
+                        return _factories[i].Item2.Prepare(amount);
+                    }
+                }
+
+                Console.WriteLine("Incorrect input, try again.");
+            }
         }
     }
 }
