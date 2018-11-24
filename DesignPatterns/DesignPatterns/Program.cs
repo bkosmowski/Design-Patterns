@@ -1,6 +1,7 @@
 ﻿using System;
 using DesignPatterns.Builder;
 using DesignPatterns.Factory;
+using DesignPatterns.Prototype;
 
 namespace DesignPatterns
 {
@@ -8,13 +9,10 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            var personFactory = new PersonFactory();
+            var line = new Line {Start = new Prototype.Point {X = 0, Y = 0}, End = new Prototype.Point {X = 1, Y = 1}};
 
-            var person1 = personFactory.CreatePerson("Tom");
-
-            var person2 = personFactory.CreatePerson("John");
-
-            var person3 = personFactory.CreatePerson("Frank");
+            var line2 = line.DeepCopy();
+            line2.Start = new Prototype.Point {X = 2, Y = 2};
 
             Console.ReadKey();
         }
