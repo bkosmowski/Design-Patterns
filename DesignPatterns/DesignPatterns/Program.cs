@@ -1,5 +1,6 @@
 ﻿using System;
 using DesignPatterns.Builder;
+using DesignPatterns.Factory;
 
 namespace DesignPatterns
 {
@@ -7,9 +8,9 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            var cd = new CodeBuilder("Person").AddField("Name", "string").AddField("Age", "int");
+            new HotDrinkMachine().PrepareDrink(AvailableDrink.Coffee, 100);
+            new HotDrinkMachine().PrepareDrink(AvailableDrink.Tea, 100);
 
-            Console.WriteLine(cd);
             Console.ReadKey();
         }
     }
