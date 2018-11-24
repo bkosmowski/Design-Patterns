@@ -7,7 +7,10 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            FacetedBuilder.Demo();
+            var cd = new CodeBuilder("Person").AddField("Name", "string").AddField("Age", "int");
+
+            Console.WriteLine(cd);
+            Console.ReadKey();
         }
     }
 }
