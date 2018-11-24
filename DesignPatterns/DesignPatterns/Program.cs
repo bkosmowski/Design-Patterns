@@ -8,7 +8,13 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            new HotDrinkMachine().PrepareDrink();
+            var personFactory = new PersonFactory();
+
+            var person1 = personFactory.CreatePerson("Tom");
+
+            var person2 = personFactory.CreatePerson("John");
+
+            var person3 = personFactory.CreatePerson("Frank");
 
             Console.ReadKey();
         }
