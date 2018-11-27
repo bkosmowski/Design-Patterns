@@ -1,4 +1,5 @@
 ﻿using System;
+using DesignPatterns.Bridge;
 using DesignPatterns.Builder;
 using DesignPatterns.Factory;
 using DesignPatterns.Prototype;
@@ -10,7 +11,7 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            var isSingleton = SingletonTester.IsSingleton(() => Database.Instance);
+            new Renderer().Demo();
             Console.ReadKey();
         }
     }
