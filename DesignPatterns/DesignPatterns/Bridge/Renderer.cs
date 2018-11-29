@@ -2,12 +2,12 @@
 
 namespace DesignPatterns.Bridge
 {
-    public interface IRenderer
+    public interface IShapeRenderer
     {
         void RenderCircle(float radius);
     }
 
-    public class RasterRenderer : IRenderer
+    public class RasterShapeRenderer : IShapeRenderer
     {
         public void RenderCircle(float radius)
         {
@@ -15,7 +15,7 @@ namespace DesignPatterns.Bridge
         }
     }
 
-    public class VectorRenderer : IRenderer
+    public class VectorShapeRenderer : IShapeRenderer
     {
         public void RenderCircle(float radius)
         {
@@ -23,11 +23,11 @@ namespace DesignPatterns.Bridge
         }
     }
 
-    public abstract class Shape
+    public abstract class RendererShape
     {
-        protected readonly IRenderer Renderer;
+        protected readonly IShapeRenderer Renderer;
 
-        protected Shape(IRenderer renderer)
+        protected RendererShape(IShapeRenderer renderer)
         {
             Renderer = renderer;
         }
@@ -36,11 +36,11 @@ namespace DesignPatterns.Bridge
         public abstract void Resize(float factor);
     }
 
-    public class Circle : Shape
+    public class Circle : RendererShape
     {
         private float _radius;
 
-        public Circle(IRenderer renderer, float radius) : base(renderer)
+        public Circle(IShapeRenderer renderer, float radius) : base(renderer)
         {
             _radius = radius;
         }
@@ -61,14 +61,14 @@ namespace DesignPatterns.Bridge
         public void Demo()
         {
             Console.WriteLine("Vector");
-            var vector = new VectorRenderer();
+            var vector = new VectorShapeRenderer();
             var circle = new Circle(vector, 5);
             circle.Draw();
             circle.Resize(2);
             circle.Draw();
 
             Console.WriteLine("Raster");
-            var raster = new RasterRenderer();
+            var raster = new RasterShapeRenderer();
             circle = new Circle(raster, 5);
             circle.Draw();
             circle.Resize(2);
