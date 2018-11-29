@@ -1,9 +1,6 @@
 ﻿using System;
 using DesignPatterns.Bridge;
-using DesignPatterns.Builder;
-using DesignPatterns.Factory;
-using DesignPatterns.Prototype;
-using DesignPatterns.Singleton;
+using DesignPatterns.Composite;
 
 namespace DesignPatterns
 {
@@ -11,7 +8,17 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            new Renderer().Demo();
+            var drawing = new GraphicObject { Name = "My Drawing" };
+            drawing.Children.Add(new GraphicObject.Square { Color = "Red" });
+            drawing.Children.Add(new GraphicObject.Circle { Color = "Yellow" });
+
+            var group = new GraphicObject();
+            group.Children.Add(new GraphicObject.Circle { Color = "Blue" });
+            group.Children.Add(new GraphicObject.Square { Color = "Blue" });
+            drawing.Children.Add(group);
+
+            Console.WriteLine(drawing);
+
             Console.ReadKey();
         }
     }
