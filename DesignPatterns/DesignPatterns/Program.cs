@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DesignPatterns.Bridge;
 using DesignPatterns.Composite;
 
@@ -8,14 +9,13 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            var neuron1 = new Neuron();
-            var neuron2 = new Neuron();
-            var layer1 = new NeuronLayer();
-            var layer2 = new NeuronLayer();
-
-            neuron1.ConnectTo(neuron2);
-            neuron1.ConnectTo(layer1);
-            layer1.ConnectTo(layer2);
+            var sum = new List<IValueContainer>
+                {
+                    new SingleValue {Value = 0},
+                    new SingleValue {Value = 1},
+                    new SingleValue {Value = 2}
+                }
+                .Sum();
 
             Console.ReadKey();
         }
