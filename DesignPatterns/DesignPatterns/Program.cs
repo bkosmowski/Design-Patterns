@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using DesignPatterns.Bridge;
 using DesignPatterns.Composite;
+using DesignPatterns.Decorator;
+using Square = DesignPatterns.Decorator.Square;
 
 namespace DesignPatterns
 {
@@ -9,13 +11,7 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            var sum = new List<IValueContainer>
-                {
-                    new SingleValue {Value = 0},
-                    new SingleValue {Value = 1},
-                    new SingleValue {Value = 2}
-                }
-                .Sum();
+            Console.WriteLine(new Transparency(new Color(new Square(10), "Red"), 0.76f).AsString());
 
             Console.ReadKey();
         }
