@@ -2,6 +2,17 @@
 
 namespace DesignPatterns.Proxy
 {
+    public class ProtectionProxy
+    {
+        public void Demo()
+        {
+            ICar car = new CarProxy(new Driver(17));
+            car.Drive();
+            car = new CarProxy(new Driver(23));
+            car.Drive();
+        }
+    }
+
     public interface ICar
     {
         void Drive();
@@ -14,7 +25,7 @@ namespace DesignPatterns.Proxy
             Console.WriteLine("Car is being driven");
         }
     }
-
+    
     public class Driver
     {
         public Driver(int age)
@@ -45,17 +56,6 @@ namespace DesignPatterns.Proxy
             {
                 Console.WriteLine("Too young");
             }
-        }
-    }
-
-    public class ProtectionProxy
-    {
-        public void Demo()
-        {
-            ICar car = new CarProxy(new Driver(17));
-            car.Drive();
-            car = new CarProxy(new Driver(23));
-            car.Drive();
         }
     }
 }
