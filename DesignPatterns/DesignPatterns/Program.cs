@@ -4,6 +4,7 @@ using DesignPatterns.Bridge;
 using DesignPatterns.Composite;
 using DesignPatterns.Decorator;
 using DesignPatterns.Flyweight;
+using DesignPatterns.Proxy;
 using Square = DesignPatterns.Decorator.Square;
 
 namespace DesignPatterns
@@ -12,9 +13,7 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            var sentence = new Sentence("hello world");
-            sentence[1].Capitalize = true;
-            Console.WriteLine(sentence);
+            new ProtectionProxy().Demo();
 
             Console.ReadKey();
         }
