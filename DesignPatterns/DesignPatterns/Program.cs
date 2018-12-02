@@ -8,7 +8,7 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            new MethodChain().Demo();
+            new BrokerChain().Demo();
 
             Console.ReadKey();
         }
