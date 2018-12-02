@@ -1,4 +1,5 @@
 ﻿using System;
+using DesignPatterns.ChainOfResponsibility;
 using DesignPatterns.Proxy;
 
 namespace DesignPatterns
@@ -7,7 +8,7 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            new DynamicProxy().Demo();
+            new MethodChain().Demo();
 
             Console.ReadKey();
         }
