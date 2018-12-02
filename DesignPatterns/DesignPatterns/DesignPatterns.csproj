@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="ImpromptuInterface" Version="7.0.1" />
     <PackageReference Include="JetBrains.dotMemoryUnit" Version="3.0.20171219.105559" />
     <PackageReference Include="MoreLinq.Core" Version="1.4.0.1" />
     <PackageReference Include="NUnit" Version="3.11.0" />

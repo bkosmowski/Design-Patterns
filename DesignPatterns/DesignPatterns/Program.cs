@@ -7,7 +7,7 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            new PropertyProxy().Demo();
+            new DynamicProxy().Demo();
 
             Console.ReadKey();
         }
