@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace DesignPatterns.ChainOfResponsibility
 {
@@ -65,7 +62,7 @@ namespace DesignPatterns.ChainOfResponsibility
         private readonly int _defense;
 
         public string Name { get; }
-        
+
         public BetterCreature(Game game, string name, int attack, int defense)
         {
             _game = game ?? throw new ArgumentNullException(nameof(game));
