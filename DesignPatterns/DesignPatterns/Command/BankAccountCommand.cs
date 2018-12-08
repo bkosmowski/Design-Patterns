@@ -16,17 +16,17 @@ namespace DesignPatterns.Command
             Console.WriteLine($"Deposit {amount}. Current balance on account: {_balance}");
         }
 
-        internal void Withdraw(int amount)
+        internal bool Withdraw(int amount)
         {
             if (_balance - amount > WithdrawLimit)
             {
                 _balance -= amount;
                 Console.WriteLine($"Withdrew {amount}. Current balance on amount: {_balance}");
+                return true;
             }
-            else
-            {
-                Console.WriteLine($"Can't withdrew {amount}. Current balance on account: {_balance}");
-            }
+
+            Console.WriteLine($"Can't withdrew {amount}. Current balance on account: {_balance}");
+            return false;
         }
 
         public override string ToString()
@@ -38,6 +38,8 @@ namespace DesignPatterns.Command
     public interface IBankAccountCommand
     {
         void Call();
+
+        void Undo();
     }
 
     public enum Argument
@@ -51,6 +53,7 @@ namespace DesignPatterns.Command
         private readonly Argument _argument;
         private readonly int _amount;
         private readonly BankAccount _bankAccount;
+        private bool _succeeded;
 
         public BankAccountCommand(Argument argument, int amount, BankAccount bankAccount)
         {
@@ -65,9 +68,27 @@ namespace DesignPatterns.Command
             {
                 case Argument.Deposit:
                     _bankAccount.Deposit(_amount);
+                    _succeeded = true;
                     break;
                 case Argument.Withdraw:
+                    _succeeded = _bankAccount.Withdraw(_amount);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        public void Undo()
+        {
+            if(_succeeded == false) return;
+
+            switch (_argument)
+            {
+                case Argument.Deposit:
                     _bankAccount.Withdraw(_amount);
+                    break;
+                case Argument.Withdraw:
+                    _bankAccount.Deposit(_amount);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
