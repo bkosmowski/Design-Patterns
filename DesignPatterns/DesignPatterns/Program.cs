@@ -1,6 +1,6 @@
 ﻿using System;
-using DesignPatterns.ChainOfResponsibility;
-using DesignPatterns.Proxy;
+using System.Collections.Generic;
+using DesignPatterns.Command;
 
 namespace DesignPatterns
 {
@@ -8,7 +8,19 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            new BrokerChain().Demo();
+            var bankAccount = new BankAccount();
+
+            var bankAccountCommands = new List<BankAccountCommand>
+            {
+                new BankAccountCommand(Argument.Deposit, 100, bankAccount),
+                new BankAccountCommand(Argument.Withdraw, 50, bankAccount)
+            };
+
+            Console.WriteLine(bankAccount);
+
+            bankAccountCommands.ForEach(c => c.Call());
+
+            Console.WriteLine(bankAccount);
 
             Console.ReadKey();
         }
