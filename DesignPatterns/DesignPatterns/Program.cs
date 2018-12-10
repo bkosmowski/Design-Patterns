@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DesignPatterns.Command;
+using DesignPatterns.Interpreter;
 using MoreLinq;
 
 namespace DesignPatterns
@@ -10,23 +11,23 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            var bankAccount = new BankAccount();
+            var ep = new ExpressionProcessor();
+            ep.Variables.Add('x', 5);
 
-            var bankAccountCommands = new List<BankAccountCommand>
-            {
-                new BankAccountCommand(Argument.Deposit, 100, bankAccount),
-                new BankAccountCommand(Argument.Withdraw, 1000, bankAccount)
-            };
+            var calculate = ep.Calculate("1");
+            var i = ep.Calculate("1+2");
+            var calculate1 = ep.Calculate("1+x");
+            var i1 = ep.Calculate("1+xy");
 
-            Console.WriteLine(bankAccount);
+            //Assert.That(ep.Calculate("1"), Is.EqualTo(1));
 
-            bankAccountCommands.ForEach(c => c.Call());
+            //Assert.That(ep.Calculate("1+2"), Is.EqualTo(3));
 
-            Console.WriteLine(bankAccount);
+            //Assert.That(ep.Calculate("1+x"), Is.EqualTo(6));
 
-            Enumerable.Reverse(bankAccountCommands).ForEach(c => c.Undo());
+            //Assert.That(ep.Calculate("1+xy"), Is.EqualTo(0));
 
-            Console.ReadKey();
+             Console.ReadKey();
         }
     }
 }
