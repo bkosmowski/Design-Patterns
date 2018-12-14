@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using DesignPatterns.Command;
-using DesignPatterns.Interpreter;
 using DesignPatterns.Iterator;
-using MoreLinq;
 
 namespace DesignPatterns
 {
