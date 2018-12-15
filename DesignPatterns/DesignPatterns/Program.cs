@@ -7,7 +7,7 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            new EventObserver().Demo();
+            new WeekEvent().Demo();
 
             Console.ReadKey();
         }
