@@ -9,22 +9,17 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            var room = new ChatRoom();
+            var eb = new EventBroker();
 
-            var john = new Person("John");
-            var jane = new Person("Jane");
-
-            room.Join(john);
-            room.Join(jane);
-
-            john.Say("hi room");
-            jane.Say("oh, hey john");
-
-            var simon = new Person("Simon");
-            room.Join(simon);
-            simon.Say("hi everyone!");
-
-            jane.PrivateMessage("Simon", "glad you could join us!");
+            var referee = new Ref(eb); // order matters here!
+            var coach = new FootballCoach(eb);
+            var player1 = new FootballPlayer(eb, "John");
+            var player2 = new FootballPlayer(eb, "Chris");
+            player1.Score();
+            player1.Score();
+            player1.Score(); // only 2 notifications
+            player1.AssaultReferee();
+            player2.Score();
 
             Console.ReadKey();
         }
