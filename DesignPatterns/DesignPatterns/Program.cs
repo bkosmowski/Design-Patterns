@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Linq;
-using DesignPatterns.Iterator;
-using DesignPatterns.Mediator;
 using DesignPatterns.Memento;
 
 namespace DesignPatterns
@@ -10,16 +7,17 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            var bankAccount = new BankAccount(100);
+            var ba = new BankAccount(100);
+            ba.Deposit(50);
+            ba.Deposit(25);
+            Console.WriteLine(ba);
 
-            var memento1 = bankAccount.Deposit(50);
-            var memento2 = bankAccount.Deposit(25);
-
-            Console.WriteLine(bankAccount);
-            bankAccount.Restore(memento1);
-            Console.WriteLine(bankAccount);
-            bankAccount.Restore(memento2);
-            Console.WriteLine(bankAccount);
+            ba.Undo();
+            Console.WriteLine($"Undo 1: {ba}");
+            ba.Undo();
+            Console.WriteLine($"Undo 2: {ba}");
+            ba.Redo();
+            Console.WriteLine($"Redo 2: {ba}");
 
             Console.ReadKey();
         }
