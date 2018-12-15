@@ -2,6 +2,7 @@
 using System.Linq;
 using DesignPatterns.Iterator;
 using DesignPatterns.Mediator;
+using DesignPatterns.Memento;
 
 namespace DesignPatterns
 {
@@ -9,17 +10,16 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            var eb = new EventBroker();
+            var bankAccount = new BankAccount(100);
 
-            var referee = new Ref(eb); // order matters here!
-            var coach = new FootballCoach(eb);
-            var player1 = new FootballPlayer(eb, "John");
-            var player2 = new FootballPlayer(eb, "Chris");
-            player1.Score();
-            player1.Score();
-            player1.Score(); // only 2 notifications
-            player1.AssaultReferee();
-            player2.Score();
+            var memento1 = bankAccount.Deposit(50);
+            var memento2 = bankAccount.Deposit(25);
+
+            Console.WriteLine(bankAccount);
+            bankAccount.Restore(memento1);
+            Console.WriteLine(bankAccount);
+            bankAccount.Restore(memento2);
+            Console.WriteLine(bankAccount);
 
             Console.ReadKey();
         }
