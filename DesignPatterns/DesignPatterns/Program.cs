@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using DesignPatterns.Iterator;
+using DesignPatterns.Mediator;
 
 namespace DesignPatterns
 {
@@ -8,9 +9,22 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            var binaryTree = new BinaryTree<int>(new Node<int>(1, new Node<int>(2), new Node<int>(3)));
+            var room = new ChatRoom();
 
-            Console.WriteLine(string.Join(',', binaryTree.InOrder.Select(x => x.Value)));
+            var john = new Person("John");
+            var jane = new Person("Jane");
+
+            room.Join(john);
+            room.Join(jane);
+
+            john.Say("hi room");
+            jane.Say("oh, hey john");
+
+            var simon = new Person("Simon");
+            room.Join(simon);
+            simon.Say("hi everyone!");
+
+            jane.PrivateMessage("Simon", "glad you could join us!");
 
             Console.ReadKey();
         }
