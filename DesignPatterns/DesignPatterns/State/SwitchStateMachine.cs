@@ -11,6 +11,7 @@ namespace DesignPatterns.State
             Failed,
             Unlocked
         }
+
         public void Demo()
         {
             var code = "1234";
@@ -34,6 +35,7 @@ namespace DesignPatterns.State
                         {
                             state = State.Failed;
                         }
+
                         break;
                     case State.Failed:
                         Console.CursorLeft = 0;
@@ -48,6 +50,5 @@ namespace DesignPatterns.State
                 }
             }
         }
-    }
     }
 }
