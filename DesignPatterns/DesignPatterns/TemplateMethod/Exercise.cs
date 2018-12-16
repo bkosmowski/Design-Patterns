@@ -41,7 +41,6 @@
 
         public class TemporaryCardDamageGame : CardGame
         {
-            // todo
             public TemporaryCardDamageGame(Creature[] creatures) : base(creatures)
             {
             }
