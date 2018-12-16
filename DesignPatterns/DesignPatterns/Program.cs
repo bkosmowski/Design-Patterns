@@ -1,5 +1,6 @@
 ﻿using System;
-using DesignPatterns.TemplateMethod;
+using System.Text;
+using DesignPatterns.Visitor;
 
 namespace DesignPatterns
 {
@@ -7,7 +8,11 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            new Chess().Run();
+            var stringBuilder = new StringBuilder();
+            var expression = new AdditionExpression(new AdditionExpression(new DoubleExpression(1), new DoubleExpression(2)), new DoubleExpression(3));
+            expression.Print(stringBuilder);
+            Console.WriteLine(stringBuilder);
+
             Console.ReadKey();
         }
     }
