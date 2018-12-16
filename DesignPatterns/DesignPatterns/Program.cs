@@ -1,5 +1,5 @@
 ﻿using System;
-using DesignPatterns.Observer;
+using DesignPatterns.Strategy;
 
 namespace DesignPatterns
 {
@@ -7,7 +7,7 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            new WeekEvent().Demo();
+            new DynamicStrategy().Demo();
 
             Console.ReadKey();
         }
