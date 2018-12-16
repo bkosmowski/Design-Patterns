@@ -3,27 +3,26 @@ using System.Collections.Generic;
 
 namespace DesignPatterns.State
 {
-    public enum State
-    {
-        OffHook,
-        Connecting,
-        Connected,
-        OnHold
-    }
-
-    public enum Trigger
-    {
-        CallDialed,
-        HungUp,
-        CallConnected,
-        PlacedOnHold,
-        TakenOffHold,
-        LeftMessage
-    }
-
-
     public class HandmadeStateMachine
     {
+        public enum State
+        {
+            OffHook,
+            Connecting,
+            Connected,
+            OnHold
+        }
+
+        public enum Trigger
+        {
+            CallDialed,
+            HungUp,
+            CallConnected,
+            PlacedOnHold,
+            TakenOffHold,
+            LeftMessage
+        }
+
         private static readonly Dictionary<State, List<(Trigger, State)>> rules
             = new Dictionary<State, List<(Trigger, State)>>
             {
