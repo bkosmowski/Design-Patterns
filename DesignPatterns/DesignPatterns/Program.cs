@@ -1,5 +1,5 @@
 ﻿using System;
-using DesignPatterns.Strategy;
+using DesignPatterns.TemplateMethod;
 
 namespace DesignPatterns
 {
@@ -7,8 +7,7 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            new StaticStrategy().Demo();
-
+            new Chess().Run();
             Console.ReadKey();
         }
     }
