@@ -3,44 +3,85 @@ using System.Text;
 
 namespace DesignPatterns.Visitor
 {
+    public interface IExpressionVisitor
+    {
+        void Visit(DoubleExpression de);
+        void Visit(AdditionExpression ae);
+    }
+
     public abstract class Expression
     {
-        public abstract void Print(StringBuilder stringBuilder);
+        public abstract void Accept(IExpressionVisitor visitor);
     }
 
     public class DoubleExpression : Expression
     {
-        private readonly double _value;
-
         public DoubleExpression(double value)
         {
-            _value = value;
+            Value = value;
         }
 
-        public override void Print(StringBuilder stringBuilder)
+        public double Value { get; }
+        
+        public override void Accept(IExpressionVisitor visitor)
         {
-            stringBuilder.Append(_value);
+            visitor.Visit(this);
         }
     }
 
     public class AdditionExpression : Expression
     {
-        private readonly Expression _left;
-        private readonly Expression _right;
-
         public AdditionExpression(Expression left, Expression right)
         {
-            _left = left ?? throw new ArgumentNullException(nameof(left));
-            _right = right ?? throw new ArgumentNullException(nameof(right));
+            Left = left ?? throw new ArgumentNullException(nameof(left));
+            Right = right ?? throw new ArgumentNullException(nameof(right));
+        }
+        public Expression Left { get; }
+        public Expression Right { get; }
+
+        public override void Accept(IExpressionVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
+
+    public class ExpressionPrinter : IExpressionVisitor
+    {
+        private readonly StringBuilder _sb = new StringBuilder();
+
+        public void Visit(DoubleExpression de)
+        {
+            _sb.Append(de.Value);
         }
 
-        public override void Print(StringBuilder stringBuilder)
+        public void Visit(AdditionExpression ae)
         {
-            stringBuilder.Append("(");
-            _left.Print(stringBuilder);
-            stringBuilder.Append("+");
-            _right.Print(stringBuilder);
-            stringBuilder.Append(")");
+            _sb.Append("(");
+            ae.Left.Accept(this);
+            _sb.Append("+");
+            ae.Right.Accept(this);
+            _sb.Append(")");
+        }
+
+        public override string ToString() => _sb.ToString();
+    }
+
+    public class ExpressionCalculator : IExpressionVisitor
+    {
+        public double Result;
+
+        public void Visit(DoubleExpression de)
+        {
+            Result = de.Value;
+        }
+
+        public void Visit(AdditionExpression ae)
+        {
+            ae.Left.Accept(this);
+            var a = Result;
+            ae.Right.Accept(this);
+            var b = Result;
+            Result = a + b;
         }
     }
 }
