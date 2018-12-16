@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
 namespace DesignPatterns.Visitor
 {
@@ -29,8 +30,8 @@ namespace DesignPatterns.Visitor
 
         public AdditionExpression(Expression left, Expression right)
         {
-            _left = left;
-            _right = right;
+            _left = left ?? throw new ArgumentNullException(nameof(left));
+            _right = right ?? throw new ArgumentNullException(nameof(right));
         }
 
         public override void Print(StringBuilder stringBuilder)
