@@ -7,7 +7,7 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            new DynamicStrategy().Demo();
+            new StaticStrategy().Demo();
 
             Console.ReadKey();
         }
